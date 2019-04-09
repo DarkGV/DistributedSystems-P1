@@ -36,6 +36,7 @@ Protocol::Protocol(){
   phdr = (struct protohdr*) malloc(sizeof(struct protohdr));
 
   phdr->status = phdr-> id = phdr->ttl = 0;
+  phdr->payload = NULL;
 
   if(setsockopt(commTunnel, IPPROTO_IP, IP_HDRINCL, &optval, sizeof(int)) < 0){
     throw "Error setting socket options for header included. Have you started as root?";
@@ -90,7 +91,10 @@ struct protohdr* Protocol::recvMsg(){
 }
 
 void Protocol::fillPayload(char* str, int size){
-  phdr->payload = (char*) malloc(size);
+
+  if(phdr->payload != NULL) free(phdr->payload);
+  
+  phdr->payload = (char*) calloc(size, sizeof(char));
   for(int i = 0; i < size; i++)
     phdr->payload[i] = '\0';
   strncpy(phdr->payload, str, size);

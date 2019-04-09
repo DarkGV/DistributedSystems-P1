@@ -97,7 +97,7 @@ void Tab::loadPage(std::string URL){
     tosave << response;
     tosave.close();
 
-    std::cout << "\e[42mTab " << id+1 << "\e[0m saved file " << pageUrl << "(\e[44m" << response.size() << "\e[0m])" << std::endl;
+    std::cout << "\e[42mTab " << id+1 << "\e[0m saved file " << pageUrl << "(\e[44m" << response.size() << "\e[0m)" << std::endl;
 }
 
 bool Tab::is_running(){

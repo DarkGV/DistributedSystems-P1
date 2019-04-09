@@ -127,6 +127,16 @@ void Browser::reading(){
                 continue;
             }
 
+            std::ifstream check("saved/" + command_parsed[1]);
+
+            if(check) {
+                std::cout << "Cached file, do you want to redownload? (last file downloaded will be overwritted)" << std::endl;;
+                std::getline(std::cin, input);
+                if(input == "n" || input == "N" ) continue;
+
+                check.close();
+            }
+
             proto.phdr->status = LOAD_URL;
             proto.phdr->id = (std::stoi(command_parsed[1])-1);
             proto.phdr->ttl = std::stoi(command_parsed[3]);
