@@ -62,7 +62,7 @@ void Browser::reading(){
             proto.sendMsg("127.0.0.1", "127.0.0.1");
         }
         else if(command_parsed[0] == "kill" && command_parsed.size() == 2){
-            proto.phdr->id = std::stoi(command_parsed[1])-1;
+            proto.phdr->id = (unsigned char)std::stoi(command_parsed[1])-1;
             proto.phdr->status = KILL;
 	        proto.phdr->ttl = 0;
             proto.sendMsg("127.0.0.1", "127.0.0.1");
@@ -109,9 +109,10 @@ void Browser::reading(){
                 continue;
             }
 
-            for(int i = 0; i < id; i++){
-                proto.phdr->id = i;
+            for(Tab* t : tabs){
+                proto.phdr->id = t->id;
                 proto.sendMsg("127.0.0.1", "127.0.0.1");
+                sleep(1);
             }
             
         }
@@ -243,6 +244,9 @@ void Browser::tabsStatus(){
                 this->id--;
             }
         }
+
+        for(int i = 0; i < tabs.size(); i++)
+            tabs[i]->id = i;
         sleep(2);
     }
 

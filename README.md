@@ -12,7 +12,7 @@ After that a file named browser will be generated. Just run it
 user:~/DistributesSystems-P1$ make
 user:~/DistributesSystems-P1$ ls
 browser Browser.hpp main.cpp Protocol.cpp Protocol.o Tab.cpp Tab.o Browser.cpp Browser.o Makefile Protocol.hpp README.md Tab.hpp
-user:~/DistributesSystems-P1$ ./browser
+user:~/DistributesSystems-P1$ sudo ./browser
 ```
 
 ## Idea Behind this implementation

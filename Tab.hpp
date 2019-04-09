@@ -12,14 +12,14 @@
 
 
 class Tab{
-
-    int id;
     Protocol proto;
     struct protohdr* packet;
     bool running, ex;
     std::string pageUrl;
+    
 
 public:
+    int id;
     Tab(int);
     void listenSocket();
     void loadPage(std::string);
